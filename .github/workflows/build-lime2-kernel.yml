@@ -1,0 +1,28 @@
+name: Build LIME2 Kernel
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build kernel
+        run: |
+          ./compile.sh kernel \
+            BOARD=lime2 \
+            BRANCH=edge \
+            RELEASE=trixie \
+            BUILD_MINIMAL=yes \
+            KERNEL_ONLY=yes \
+            EXPERT=yes
+
+      - name: Upload kernel deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: lime2-kernel-panel-lvds
+          path: output/debs/linux-image-edge-sunxi*.deb
