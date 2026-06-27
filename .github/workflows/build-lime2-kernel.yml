@@ -9,10 +9,19 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
-      - name: Get kernel source and show lvds file
+      - name: Build kernel
         run: |
-          sudo apt-get install -y git
-          git clone --depth=1 -b linux-7.0.y https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git linux-src 2>/dev/null || \
-          git clone --depth=1 https://github.com/torvalds/linux.git linux-src
-          cat linux-src/drivers/gpu/drm/sun4i/sun4i_lvds.c
+          ./compile.sh kernel \
+            BOARD=lime2 \
+            BRANCH=edge \
+            RELEASE=trixie \
+            BUILD_MINIMAL=yes \
+            KERNEL_ONLY=yes \
+            KERNEL_CONFIGURE=no \
+            EXPERT=yes \
+            COMPRESS_OUTPUTIMAGE=no
+      - name: Upload kernel deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: lime2-kernel-panel-lvds
+          path: output/debs/linux-image-edge-sunxi*.deb
