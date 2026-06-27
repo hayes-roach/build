@@ -10,15 +10,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Check kernel source
-        run: |
-          sudo apt-get install -y git
-          git clone --depth=1 -b linux-7.0.y \
-            https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git src
-          grep -n "sun4i_tcon_setup_lvds_phy\|sun7i_a20_tcon0_quirks\|LVDS_ANA0_CK_EN\|LVDS_ANA1_REG" \
-            src/drivers/gpu/drm/sun4i/sun4i_tcon.c \
-            src/drivers/gpu/drm/sun4i/sun4i_tcon.h 2>/dev/null | head -40
-
       - name: Build kernel
         run: |
           ./compile.sh kernel \
