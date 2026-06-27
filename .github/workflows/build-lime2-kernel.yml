@@ -9,19 +9,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-      - name: Build kernel
+      - name: Show tcon0 quirks
         run: |
-          ./compile.sh kernel \
-            BOARD=lime2 \
-            BRANCH=edge \
-            RELEASE=trixie \
-            BUILD_MINIMAL=yes \
-            KERNEL_ONLY=yes \
-            KERNEL_CONFIGURE=no \
-            EXPERT=yes \
-            COMPRESS_OUTPUTIMAGE=no
-      - name: Upload kernel deb
-        uses: actions/upload-artifact@v4
-        with:
-          name: lime2-kernel-panel-lvds
-          path: output/debs/linux-image-edge-sunxi*.deb
+          grep -A8 "sun7i_a20_tcon0_quirks" $(find . -path "*/sun4i/sun4i_tcon.c" | head -1)
