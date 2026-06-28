@@ -1,5 +1,5 @@
---- a/arch/arm/boot/dts/sun7i-a20-olinuxino-lime2-emmc.dts
-+++ b/arch/arm/boot/dts/sun7i-a20-olinuxino-lime2-emmc.dts
+--- a/sun7i-a20-olinuxino-lime2-emmc.dts
++++ b/sun7i-a20-olinuxino-lime2-emmc.dts
 @@ -1900,7 +1900,7 @@
  panel {
      compatible = "panel-lvds";
