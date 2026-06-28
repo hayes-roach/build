@@ -1,8 +1,0 @@
---- a/sun7i-a20-olinuxino-lime2-emmc.dts
-+++ b/sun7i-a20-olinuxino-lime2-emmc.dts
-@@ -1900,7 +1900,7 @@
- panel {
-     compatible = "panel-lvds";
--    data-mapping = "vesa-24";
-+    data-mapping = "jeida-24";
- };
