@@ -1,0 +1,11 @@
+--- a/configs/A20-OLinuXino-Lime2-eMMC_defconfig
++++ b/configs/A20-OLinuXino-Lime2-eMMC_defconfig
+@@ -35,3 +35,11 @@ CONFIG_USB_MUSB_GADGET=y
++CONFIG_VIDEO=y
++CONFIG_VIDEO_SUNXI=y
++CONFIG_VIDEO_LCD_PANEL_LVDS=y
++CONFIG_VIDEO_LCD_MODE="x:1366,y:768,depth:18,pclk_khz:70000,le:53,ri:20,up:22,lo:17,hs:1,vs:1,sync:3,vmode:0"
++CONFIG_VIDEO_LCD_DCLK_PHASE=0
++CONFIG_VIDEO_LCD_POWER="PH7"
++CONFIG_VIDEO_LCD_BL_PWM="PB2"
++CONFIG_VIDEO_LCD_BL_EN=""
