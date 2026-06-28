@@ -1,6 +1,8 @@
-name: Build LIME2 Kernel
+name: Build LIME2 Kernel and U-Boot
+
 on:
   workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -22,8 +24,18 @@ jobs:
             EXPERT=yes \
             COMPRESS_OUTPUTIMAGE=no
 
-      - name: Upload kernel deb
+      - name: Build u-boot
+        run: |
+          ./compile.sh u-boot \
+            BOARD=lime2 \
+            BRANCH=current \
+            EXPERT=yes
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: lime2-kernel-panel-lvds
-          path: output/debs/linux-image-edge-sunxi*.deb
+          name: lime2-kernel-uboot
+          path: |
+            output/debs/linux-image-edge-sunxi*.deb
+            output/debs/linux-u-boot-lime2*.deb
+          retention-days: 7
