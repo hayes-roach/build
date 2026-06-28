@@ -1,8 +1,6 @@
 name: Build LIME2 Kernel and U-Boot
-
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -11,7 +9,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
-
       - name: Build kernel
         run: |
           ./compile.sh kernel \
@@ -23,14 +20,13 @@ jobs:
             KERNEL_CONFIGURE=no \
             EXPERT=yes \
             COMPRESS_OUTPUTIMAGE=no
-
       - name: Build u-boot
         run: |
-          ./compile.sh u-boot \
+          ./compile.sh \
             BOARD=lime2 \
             BRANCH=current \
+            UBOOT_ONLY=yes \
             EXPERT=yes
-
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
