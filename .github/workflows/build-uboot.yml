@@ -1,0 +1,28 @@
+name: Build LIME2 U-Boot
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build u-boot
+        run: |
+          ./compile.sh kernel \
+            BOARD=lime2 \
+            BRANCH=current \
+            RELEASE=trixie \
+            BUILD_MINIMAL=yes \
+            KERNEL_ONLY=yes \
+            KERNEL_CONFIGURE=no \
+            EXPERT=yes \
+            COMPRESS_OUTPUTIMAGE=no
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lime2-uboot
+          path: output/debs/linux-u-boot-lime2*.deb
+          retention-days: 7
