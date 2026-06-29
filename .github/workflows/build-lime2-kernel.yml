@@ -20,13 +20,6 @@ jobs:
             KERNEL_CONFIGURE=no \
             EXPERT=yes \
             COMPRESS_OUTPUTIMAGE=no
-      - name: Build u-boot
-        run: |
-          ./compile.sh \
-            BOARD=lime2 \
-            BRANCH=current \
-            UBOOT_ONLY=yes \
-            EXPERT=yes
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
