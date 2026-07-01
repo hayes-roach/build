@@ -11,15 +11,12 @@ jobs:
           fetch-depth: 1
       - name: Build u-boot
         run: |
-          ./compile.sh kernel \
+          ./compile.sh u-boot \
             BOARD=lime2 \
             BRANCH=current \
-            RELEASE=trixie \
-            BUILD_MINIMAL=yes \
-            KERNEL_ONLY=yes \
-            KERNEL_CONFIGURE=no \
-            EXPERT=yes \
-            COMPRESS_OUTPUTIMAGE=no
+            EXPERT=yes
+      - name: List output
+        run: find output/debs -name "*.deb" 2>/dev/null || echo "no debs found"
       - name: Upload u-boot
         uses: actions/upload-artifact@v4
         with:
